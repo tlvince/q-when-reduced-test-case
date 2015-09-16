@@ -15,17 +15,31 @@ describe('when', function () {
   it('should give cakes', function (done) {
     promisey.cakey()
       .then(function (cake) {
-        expect(cake).toBe('brownie')
+        expect(cake).to.be('brownie')
       })
-      .catch(self.fail.bind())
       .finally(done)
     $rootScope.$apply()
   })
 
-  it('should give fruit', function () {
+  it('should give fruit: SO', function () {
     return promisey.fruity()
       .then(function (cake) {
-        expect(cake).toBe('passes-when-it-shouldnt')
+        expect(cake).to.be('apple')
+      })
+  })
+
+  it('should give fruit: chai-as-promised', function () {
+    return promisey.fruity()
+      .then(function (cake) {
+        cake.should.eventually.equal('hello')
+      })
+  })
+
+  it('should give fruit: done variant', function (done) {
+    promisey.fruity()
+      .then(function (cake) {
+        cake.should.equal('hello')
+        done()
       })
   })
 })
