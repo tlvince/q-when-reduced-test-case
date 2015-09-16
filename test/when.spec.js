@@ -22,14 +22,10 @@ describe('when', function () {
     $rootScope.$apply()
   })
 
-  it('should give fruit', function (done) {
-    promisey.fruity()
+  it('should give fruit', function () {
+    return promisey.fruity()
       .then(function (cake) {
-        // XXX: does not resolve
-        expect(cake).toBe('apple')
+        expect(cake).toBe('passes-when-it-shouldnt')
       })
-      .catch(self.fail.bind())
-      .finally(done)
-    $rootScope.$apply()
   })
 })
